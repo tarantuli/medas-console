@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Medas\Console;
 
+use Medas\ServiceManager\AsSingleton;
 use Medas\ServiceManager\BasePackage;
 
 class ConsolePackage extends BasePackage
 {
+    use AsSingleton;
+
     public function dependencies(): array
     {
         return $this->dependenciesByClass([
