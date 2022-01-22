@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 use Medas\ConfigManager\ConfigManager;
-use Medas\Console\ConsolePackage;
 use Medas\ServiceManager\ServiceManager;
 use Symfony\Component\Cache\Adapter\ApcuAdapter;
 use Symfony\Contracts\Cache\CacheInterface;
 
+require_once __DIR__ . '/bootstrap.php';
+
 $sm = ServiceManager::get();
-$sm->addPackage(ConsolePackage::instance());
 
 $cache = new ApcuAdapter('entity-manager');
 $cache->clear();

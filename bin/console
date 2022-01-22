@@ -7,7 +7,7 @@ use Medas\ServiceManager\ServiceManager;
 use Symfony\Component\Cache\Adapter\ApcuAdapter;
 use Symfony\Contracts\Cache\CacheInterface;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 $sm = ServiceManager::get();
 $sm->addPackage(ConsolePackage::instance());
