@@ -7,10 +7,15 @@ namespace Medas\Console\Printer;
 class Table
 {
     public function __construct(
-        private array $headers = [],
+        private array $headers,
         private array $data = []
     )
     {
+    }
+
+    public function addData(array $data): void
+    {
+        $this->data[] = $data;
     }
 
     /** @return Table\Column[] */
