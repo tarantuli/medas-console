@@ -12,6 +12,7 @@ use Medas\ServiceManager\Attributes\Service;
 class CommandsCommand extends BaseConsoleCommand
 {
     public function __construct(
+        private ConsoleGroup $group,
         private Printer             $printer,
         private ProcessorRepository $repository,
     )
@@ -20,7 +21,7 @@ class CommandsCommand extends BaseConsoleCommand
 
     public function group(): ConsoleCommandGroup
     {
-        return service(ConsoleGroup::class);
+        return $this->group;
     }
 
     public function name(): string
@@ -46,5 +47,8 @@ class CommandsCommand extends BaseConsoleCommand
                 new Printer\Text('   ' . $processor->fullCommand(), Printer\BashFormat::WHITE)
             );
         }
+
+        $this->printer->printLine();
+        $this->printer->printLine();
     }
 }

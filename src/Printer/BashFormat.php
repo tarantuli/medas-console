@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Console\Printer;
 
+// https://misc.flogisoft.com/bash/tip_colors_and_formatting
 class BashFormat
 {
     // Formatting

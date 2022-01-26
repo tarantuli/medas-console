@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace Medas\Console;
 
+use Medas\Console\Printer\Table\TablePrinter;
 use Medas\Console\Printer\Text;
 use Medas\ServiceManager\Attributes\Service;
 
 #[Service]
 class Printer
 {
+    public function __construct(
+        private TablePrinter $tablePrinter,
+    )
+    {
+    }
+
     public function printLine(Text ...$texts): self
     {
         $this->print(... $texts);
@@ -35,6 +42,13 @@ class Printer
     public function format(string $string, string|array $format): self
     {
         printf("\e[%sm%s\e[0m", is_array($format) ? implode(';', $format) : $format, $string);
+
+        return $this;
+    }
+
+    public function printTable(Printer\Table $table): self
+    {
+        $this->tablePrinter->print($table);
 
         return $this;
     }

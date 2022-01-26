@@ -21,11 +21,10 @@ class ProcessorRepository
     {
         $key = ConsoleCommandGroup::class . ' children of ' . ($parent ? $parent::class : 'null');
         $key = preg_replace('/[^\w.]/', '_', $key);
+
         return $this->cache->get($key, function () use ($parent) {
             return $this->findGroups($parent);
-        }
-
-        );
+        });
     }
 
     private function findGroups(ConsoleCommandGroup|null $parent): array
