@@ -58,12 +58,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:tarantuli/medas-service-manager.git",
-                "reference": "5d4ba9d297c36aa5e135c90fa0d3b595d0f5ace3"
+                "reference": "d3fa5baa547caf1711e5931a514d5ea0e55fa476"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-service-manager/zipball/5d4ba9d297c36aa5e135c90fa0d3b595d0f5ace3",
-                "reference": "5d4ba9d297c36aa5e135c90fa0d3b595d0f5ace3",
+                "url": "https://api.github.com/repos/tarantuli/medas-service-manager/zipball/d3fa5baa547caf1711e5931a514d5ea0e55fa476",
+                "reference": "d3fa5baa547caf1711e5931a514d5ea0e55fa476",
                 "shasum": ""
             },
             "require": {
@@ -98,7 +98,7 @@
                 "source": "https://github.com/tarantuli/medas-service-manager/tree/dev",
                 "issues": "https://github.com/tarantuli/medas-service-manager/issues"
             },
-            "time": "2022-02-23T10:14:39+00:00"
+            "time": "2022-02-23T11:00:48+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",

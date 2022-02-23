@@ -26,9 +26,10 @@ class ProcessorRepository
 
     private function findGroups(ConsoleCommandGroup|null $parent): array
     {
+        $sm = sm();
         $groups = [];
 
-        foreach (get_declared_classes() as $className) {
+        foreach ($sm->getServiceClassNames() as $className) {
             $class = new \ReflectionClass($className);
 
             if (!$class->implementsInterface(ConsoleCommandGroup::class)) {
@@ -36,7 +37,7 @@ class ProcessorRepository
             }
 
             /** @var ConsoleCommandGroup $group */
-            $group = service($className);
+            $group = $sm->resolve($className);
 
             if ($group->parent() === $parent) {
                 $groups[] = $group;
@@ -59,8 +60,9 @@ class ProcessorRepository
     /** @return ConsoleCommand[] */
     private function findProcessors(ConsoleCommandGroup $parent): array
     {
+        $sm = sm();
         $processors = [];
-        foreach (get_declared_classes() as $className) {
+        foreach ($sm->getServiceClassNames() as $className) {
             $class = new \ReflectionClass($className);
 
             if (!$class->implementsInterface(ConsoleCommand::class)) {
@@ -68,7 +70,7 @@ class ProcessorRepository
             }
 
             /** @var ConsoleCommand $processor */
-            $processor = service($className);
+            $processor = $sm->resolve($className);
 
             if ($processor->group() === $parent) {
                 $processors[] = $processor;
@@ -89,8 +91,9 @@ class ProcessorRepository
     private function findAllProcessors(): array
     {
         $processors = [];
+        $sm = sm();
 
-        foreach (get_declared_classes() as $className) {
+        foreach ($sm->getServiceClassNames() as $className) {
             $class = new \ReflectionClass($className);
 
             if ($class->isAbstract()) {
@@ -101,7 +104,7 @@ class ProcessorRepository
                 continue;
             }
 
-            $processors[] = service($className);
+            $processors[] = $sm->resolve($className);
         }
 
         return $processors;
