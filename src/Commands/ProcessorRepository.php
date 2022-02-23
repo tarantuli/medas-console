@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Medas\Console\Commands;
 
 use Medas\ServiceManager\Attributes\Service;
-use Symfony\Contracts\Cache\CacheInterface;
+use Medas\ServiceManager\Interfaces\Cache;
 
 #[Service]
 class ProcessorRepository
 {
     public function __construct(
-        private CacheInterface $cache,
+        private Cache $cache,
     )
     {
     }
@@ -19,10 +19,7 @@ class ProcessorRepository
     /** @return ConsoleCommandGroup[] */
     public function getGroups(ConsoleCommandGroup $parent = null): array
     {
-        $key = ConsoleCommandGroup::class . ' children of ' . ($parent ? $parent::class : 'null');
-        $key = preg_replace('/[^\w.]/', '_', $key);
-
-        return $this->cache->get($key, function () use ($parent) {
+        return $this->cache->get([$this::class, 'getGroups', $parent ? $parent::class : 'null'], function () use ($parent) {
             return $this->findGroups($parent);
         });
     }
@@ -52,10 +49,7 @@ class ProcessorRepository
     /** @return ConsoleCommand[] */
     public function getProcessors(ConsoleCommandGroup $parent): array
     {
-        $key = ConsoleCommand::class . ' child of ' . $parent::class;
-        $key = preg_replace('/[^\w.]/', '_', $key);
-
-        return $this->cache->get($key, function () use ($parent) {
+        return $this->cache->get([$this::class, 'getProcessors', $parent::class], function () use ($parent) {
             return $this->findProcessors($parent);
         }
 
@@ -87,10 +81,7 @@ class ProcessorRepository
     /** @return ConsoleCommand[] */
     public function getAllProcessors(): array
     {
-        $key = 'all ' . ConsoleCommand::class;
-        $key = preg_replace('/[^\w.]/', '_', $key);
-
-        return $this->cache->get($key, function () {
+        return $this->cache->get([$this::class, 'getAllProcessors'], function () {
             return $this->findAllProcessors();
         });
     }

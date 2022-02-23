@@ -1,35 +1,50 @@
 <?php
 
 use Medas\Console\Commands\CommandProcessor;
-use Medas\Console\ConsolePackage;
 use Medas\Console\Printer;
-use Medas\ServiceManager\ServiceManager;
-use Symfony\Component\Cache\Adapter\ApcuAdapter;
-use Symfony\Contracts\Cache\CacheInterface;
+use Medas\Core\Str;
+use Medas\ServiceManager\Interfaces\Package;
 
 require_once __DIR__ . '/../bootstrap.php';
-
-$sm = ServiceManager::get();
-$sm->addPackage(ConsolePackage::instance());
-
-$cache = new ApcuAdapter('entity-manager');
-$cache->clear();
-$sm->bindService($cache, CacheInterface::class);
 
 $arguments = $argv;
 if (str_ends_with($arguments[0], 'console')) {
     array_shift($arguments);
 }
 
+foreach ($arguments as $argument) {
+    if (str_starts_with($argument, '--addPackage=')) {
+        /** @var Package $class */
+        $class = substr($argument, 13);
+        sm()->addPackage($class::instance());
+    }
+}
+
 try {
     service(CommandProcessor::class)->process($arguments);
 }
-catch (Exception $exception) {
-    service(Printer::class)
-        ->printLine()
+catch (Exception|Error $exception) {
+    $printer = service(Printer::class);
+
+    foreach (array_reverse($exception->getTrace()) as $trace) {
+        $printer->printLine(new Printer\Text((isset($trace['class']) ? $trace['class'] . $trace['type'] : '') . $trace['function'] . '()'));
+
+        foreach ($trace['args'] as $i => $argument) {
+            $printer->printLine(new Printer\Text('   ' . $i . ': ' . Str::fromVariable($argument)));
+        }
+
+        if (isset($trace['file'])) {
+            $printer->printLine(new Printer\Text('      at ' . $trace['file'] . ':' . $trace['line']));
+        }
+
+        $printer->printLine();
+    }
+
+    $printer
         ->printLine(new Printer\Text('[Exception]', Printer\BashFormat::WHITE))
         ->printLine()
         ->printLine(new Printer\Text('  ' . $exception->getMessage()))
         ->printLine()
-        ->printLine(new Printer\Text('at ' . $exception->getFile() . ':' . $exception->getLine()));
+        ->printLine(new Printer\Text('at ' . $exception->getFile() . ':' . $exception->getLine()))
+        ->printLine();
 }
