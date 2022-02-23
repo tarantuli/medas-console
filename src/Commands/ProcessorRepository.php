@@ -10,6 +10,9 @@ use Medas\ServiceManager\Interfaces\Cache;
 #[Service]
 class ProcessorRepository
 {
+    private array $groups;
+    private array $processors;
+
     public function __construct(
         private Cache $cache,
     )
@@ -33,28 +36,37 @@ class ProcessorRepository
     /** @return ConsoleCommandGroup[] */
     public function getAllGroups(): array
     {
-        return $this->cache->get([$this::class, 'getAllGroups'], function () {
-            return $this->findAllGroups();
-        });
+        if (!isset($this->groups)) {
+            $groupNames = $this->cache->get([$this::class, 'getAllGroupNames'], function () {
+                return $this->findAllGroupNames();
+            });
+
+            $this->groups = [];
+
+            foreach ($groupNames as $groupName) {
+                $this->groups[] = service($groupName);
+            }
+        }
+
+        return $this->groups;
     }
 
-    private function findAllGroups(): array
+    /** @return string[] */
+    private function findAllGroupNames(): array
     {
-        $sm = sm();
-        $groups = [];
+        $groupNames = [];
 
-        foreach ($sm->getServiceClassNames() as $className) {
+        foreach (sm()->getServiceClassNames() as $className) {
             $class = new \ReflectionClass($className);
 
             if (!$class->implementsInterface(ConsoleCommandGroup::class)) {
                 continue;
             }
 
-            /** @var ConsoleCommandGroup $group */
-            $groups[] = $sm->resolve($className);
+            $groupNames[] = $className;
         }
 
-        return $groups;
+        return $groupNames;
     }
 
     /** @return ConsoleCommand[] */
@@ -74,17 +86,27 @@ class ProcessorRepository
     /** @return ConsoleCommand[] */
     public function getAllProcessors(): array
     {
-        return $this->cache->get([$this::class, 'getAllProcessors'], function () {
-            return $this->findAllProcessors();
-        });
+        if (!isset($this->processors)) {
+            $processorNames = $this->cache->get([$this::class, 'getAllProcessorNames'], function () {
+                return $this->findAllProcessorNames();
+            });
+
+            $this->processors = [];
+
+            foreach ($processorNames as $processorName) {
+                $this->processors[] = service($processorName);
+            }
+        }
+
+        return $this->processors;
     }
 
-    private function findAllProcessors(): array
+    /** @return string[] */
+    private function findAllProcessorNames(): array
     {
-        $processors = [];
-        $sm = sm();
+        $processorNames = [];
 
-        foreach ($sm->getServiceClassNames() as $className) {
+        foreach (sm()->getServiceClassNames() as $className) {
             $class = new \ReflectionClass($className);
 
             if ($class->isAbstract()) {
@@ -95,9 +117,9 @@ class ProcessorRepository
                 continue;
             }
 
-            $processors[] = $sm->resolve($className);
+            $processorNames[] = $className;
         }
 
-        return $processors;
+        return $processorNames;
     }
 }
