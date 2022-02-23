@@ -19,12 +19,26 @@ class ProcessorRepository
     /** @return ConsoleCommandGroup[] */
     public function getGroups(ConsoleCommandGroup $parent = null): array
     {
-        return $this->cache->get([$this::class, 'getGroups', $parent ? $parent::class : 'null'], function () use ($parent) {
-            return $this->findGroups($parent);
+        $groups = [];
+
+        foreach ($this->getAllGroups() as $group) {
+            if ($group->parent() === $parent) {
+                $groups[] = $group;
+            }
+        }
+
+        return $groups;
+    }
+
+    /** @return ConsoleCommandGroup[] */
+    public function getAllGroups(): array
+    {
+        return $this->cache->get([$this::class, 'getAllGroups'], function () {
+            return $this->findAllGroups();
         });
     }
 
-    private function findGroups(ConsoleCommandGroup|null $parent): array
+    private function findAllGroups(): array
     {
         $sm = sm();
         $groups = [];
@@ -37,11 +51,7 @@ class ProcessorRepository
             }
 
             /** @var ConsoleCommandGroup $group */
-            $group = $sm->resolve($className);
-
-            if ($group->parent() === $parent) {
-                $groups[] = $group;
-            }
+            $groups[] = $sm->resolve($className);
         }
 
         return $groups;
@@ -50,28 +60,9 @@ class ProcessorRepository
     /** @return ConsoleCommand[] */
     public function getProcessors(ConsoleCommandGroup $parent): array
     {
-        return $this->cache->get([$this::class, 'getProcessors', $parent::class], function () use ($parent) {
-            return $this->findProcessors($parent);
-        }
-
-        );
-    }
-
-    /** @return ConsoleCommand[] */
-    private function findProcessors(ConsoleCommandGroup $parent): array
-    {
-        $sm = sm();
         $processors = [];
-        foreach ($sm->getServiceClassNames() as $className) {
-            $class = new \ReflectionClass($className);
 
-            if (!$class->implementsInterface(ConsoleCommand::class)) {
-                continue;
-            }
-
-            /** @var ConsoleCommand $processor */
-            $processor = $sm->resolve($className);
-
+        foreach ($this->getAllProcessors() as $processor) {
             if ($processor->group() === $parent) {
                 $processors[] = $processor;
             }
