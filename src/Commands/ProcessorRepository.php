@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace Medas\Console\Commands;
 
 use Medas\ServiceManager\Attributes\Service;
-use Medas\ServiceManager\Interfaces\Cache;
+use Medas\ServiceManager\Cache\CacheManager;
+use Medas\ServiceManager\Interfaces\PrimesCache;
 
 #[Service]
-class ProcessorRepository
+class ProcessorRepository implements PrimesCache
 {
     private array $groups;
     private array $processors;
 
     public function __construct(
-        private Cache $cache,
+        private CacheManager $cacheManager,
     )
     {
     }
@@ -37,7 +38,7 @@ class ProcessorRepository
     public function getAllGroups(): array
     {
         if (!isset($this->groups)) {
-            $groupNames = $this->cache->get([$this::class, 'getAllGroupNames'], function () {
+            $groupNames = $this->cacheManager->get()->get([$this::class, 'getAllGroupNames'], function () {
                 return $this->findAllGroupNames();
             });
 
@@ -87,7 +88,7 @@ class ProcessorRepository
     public function getAllProcessors(): array
     {
         if (!isset($this->processors)) {
-            $processorNames = $this->cache->get([$this::class, 'getAllProcessorNames'], function () {
+            $processorNames = $this->cacheManager->get()->get([$this::class, 'getAllProcessorNames'], function () {
                 return $this->findAllProcessorNames();
             });
 
@@ -121,5 +122,11 @@ class ProcessorRepository
         }
 
         return $processorNames;
+    }
+
+    public function primeCache(): void
+    {
+        $this->getAllGroups();
+        $this->getAllProcessors();
     }
 }
