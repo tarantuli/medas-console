@@ -17,7 +17,7 @@ class CommandProcessor
 
     public function process(array $arguments): void
     {
-        $processor = $this->processorFinder->find($arguments[0]);
+        $processor = $this->processorFinder->find($arguments[0] ?? 'console:commands');
 
         $processor->process($arguments);
     }
