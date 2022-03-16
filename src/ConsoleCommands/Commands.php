@@ -9,10 +9,10 @@ use Medas\Console\Printer;
 use Medas\ServiceManager\Attributes\Service;
 
 #[Service]
-class CommandsCommand extends BaseConsoleCommand
+class Commands extends BaseConsoleCommand
 {
     public function __construct(
-        private ConsoleGroup $group,
+        private Group               $group,
         private Printer             $printer,
         private ProcessorRepository $repository,
     )
@@ -47,8 +47,5 @@ class CommandsCommand extends BaseConsoleCommand
                 new Printer\Text('   ' . $processor->fullCommand(), Printer\BashFormat::WHITE)
             );
         }
-
-        $this->printer->printLine();
-        $this->printer->printLine();
     }
 }

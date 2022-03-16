@@ -97,6 +97,8 @@ class ProcessorRepository implements PrimesCache
             foreach ($processorNames as $processorName) {
                 $this->processors[] = service($processorName);
             }
+
+            usort($this->processors, fn(ConsoleCommand $a, ConsoleCommand $b) => strcasecmp($a->fullCommand(), $b->fullCommand()));
         }
 
         return $this->processors;
