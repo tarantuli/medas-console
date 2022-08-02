@@ -34,6 +34,6 @@ class NullGlyph implements ConfigOption
 
     public function default(): string
     {
-        return '–';
+        return '〜';
     }
 }
