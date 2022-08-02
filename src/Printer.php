@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Console;
 
+use Medas\ConfigOptions\Attributes\ConfigValue;
+use Medas\Console\ConfigOptions\NullGlyph;
 use Medas\Console\Printer\Table\TablePrinter;
 use Medas\Console\Printer\Text;
 use Medas\ServiceManager\Attributes\Service;
@@ -12,6 +14,8 @@ use Medas\ServiceManager\Attributes\Service;
 class Printer
 {
     public function __construct(
+        #[ConfigValue(NullGlyph::class)]
+        private string       $nullGlyph,
         private TablePrinter $tablePrinter,
     )
     {
@@ -28,7 +32,10 @@ class Printer
     public function print(Text ...$texts): self
     {
         foreach ($texts as $text) {
-            if ($text->format === null) {
+            if ($text === null) {
+                echo $this->nullGlyph;
+            }
+            elseif ($text->format === null) {
                 echo $text->text;
             }
             else {

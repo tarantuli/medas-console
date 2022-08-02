@@ -16,6 +16,8 @@ foreach ($arguments as $argument) {
     if (str_starts_with($argument, '--addPackage=')) {
         /** @var Package $class */
         $class = substr($argument, 13);
+
+        /** @noinspection PhpParamsInspection */
         sm()->addPackage($class::instance());
     }
 }
@@ -24,27 +26,33 @@ try {
     service(CommandProcessor::class)->process($arguments);
 }
 catch (Exception|Error $exception) {
-    $printer = service(Printer::class);
+    try {
+        $printer = service(Printer::class);
 
-    foreach (array_reverse($exception->getTrace()) as $trace) {
-        $printer->printLine(new Printer\Text((isset($trace['class']) ? $trace['class'] . $trace['type'] : '') . $trace['function'] . '()'));
+        foreach (array_reverse($exception->getTrace()) as $trace) {
+            $printer->printLine(new Printer\Text((isset($trace['class']) ? $trace['class'] . $trace['type'] : '') . $trace['function'] . '()'));
 
-        foreach ($trace['args'] as $i => $argument) {
-            $printer->printLine(new Printer\Text('   ' . $i . ': ' . Str::fromVariable($argument)));
+            foreach ($trace['args'] as $i => $argument) {
+                $printer->printLine(new Printer\Text('   ' . $i . ': ' . Str::fromVariable($argument)));
+            }
+
+            if (isset($trace['file'])) {
+                $printer->printLine(new Printer\Text('      at ' . $trace['file'] . ':' . $trace['line']));
+            }
+
+            $printer->printLine();
         }
 
-        if (isset($trace['file'])) {
-            $printer->printLine(new Printer\Text('      at ' . $trace['file'] . ':' . $trace['line']));
-        }
-
-        $printer->printLine();
+        $printer
+            ->printLine(new Printer\Text('[Exception]', Printer\BashFormat::WHITE))
+            ->printLine()
+            ->printLine(new Printer\Text('  ' . $exception->getMessage()))
+            ->printLine()
+            ->printLine(new Printer\Text('at ' . $exception->getFile() . ':' . $exception->getLine()))
+            ->printLine();
     }
-
-    $printer
-        ->printLine(new Printer\Text('[Exception]', Printer\BashFormat::WHITE))
-        ->printLine()
-        ->printLine(new Printer\Text('  ' . $exception->getMessage()))
-        ->printLine()
-        ->printLine(new Printer\Text('at ' . $exception->getFile() . ':' . $exception->getLine()))
-        ->printLine();
+    catch (Exception|Error) {
+        // Last ditch effort to print something useful
+        echo $exception->getFile(), ':', $exception->getLine(), '  ', $exception->getMessage(), "\n";
+    }
 }
