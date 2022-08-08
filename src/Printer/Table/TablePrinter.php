@@ -55,10 +55,26 @@ class TablePrinter
                 $elements[] = new Printer\Text(str_repeat(' ', $this->columnSeparator), $this->lineColor);
             }
 
-            $elements[] = new Printer\Text(sprintf('%-' . ($column->maxWidth) . 's', $column->header), $this->headerColor);
+            $elements[] = new Printer\Text($this->padString($column->header, $column->maxWidth), $this->headerColor);
         }
 
         $this->printer->printLine(...$elements);
+    }
+
+    private function padString(mixed $value, int $width): string
+    {
+        $padLength = $width - mb_strwidth((string) $value);
+
+        if ($padLength <= 0) {
+            return $value;
+        }
+
+        if (is_int($value)) {
+            return str_repeat(' ', $padLength) . $value;
+        }
+        else {
+            return $value . str_repeat(' ', $padLength);
+        }
     }
 
     private function initializeElements(): array
@@ -94,8 +110,7 @@ class TablePrinter
                 $elements[] = new Printer\Text(str_repeat(' ', $this->columnSeparator), $this->lineColor);
             }
 
-            $alignment = is_int($value) ? '' : '-';
-            $elements[] = new Printer\Text(sprintf('%' . $alignment . ($this->columns[$i]->maxWidth) . 's', $value));
+            $elements[] = new Printer\Text($this->padString($value, $this->columns[$i]->maxWidth));
         }
 
         $this->printer->printLine(...$elements);
