@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Medas\Console;
 
-use Medas\ConfigOptions\Attributes\ConfigValue;
 use Medas\Console\ConfigOptions\NullGlyph;
 use Medas\Console\Printer\Table\TablePrinter;
 use Medas\Console\Printer\Text;
 use Medas\ServiceManager\Attributes\Service;
+use Medas\ServiceManager\ConfigOptions\ConfigValue;
 
 #[Service]
 class Printer

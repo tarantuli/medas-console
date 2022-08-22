@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Medas\Console\Printer\Table;
 
-use Medas\ConfigOptions\Attributes\ConfigValue;
 use Medas\Console\ConfigOptions\NullGlyph;
 use Medas\Console\Printer;
 use Medas\Console\Printer\Table;
 use Medas\ServiceManager\Attributes\Service;
+use Medas\ServiceManager\ConfigOptions\ConfigValue;
 
 /**
  * @see https://en.wikipedia.org/wiki/Box-drawing_character#Box_Drawing for box drawing characters

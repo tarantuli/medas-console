@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Medas\Console\ConsoleCommands;
 
-use Medas\Console\Commands\{BaseConsoleCommand, ConsoleCommandGroup, ProcessorRepository};
+use Medas\Console\Commands\{ProcessorRepository};
 use Medas\Console\Printer;
 use Medas\ServiceManager\Attributes\Service;
+use Medas\ServiceManager\Console\{BaseConsoleCommand, ConsoleCommandGroup};
 
 #[Service]
 class Commands extends BaseConsoleCommand

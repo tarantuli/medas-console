@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Medas\Console\Commands;
 
 use Medas\ServiceManager\Attributes\Service;
+use Medas\ServiceManager\Console\ConsoleCommand;
+use Medas\ServiceManager\Console\ConsoleCommandGroup;
 
 #[Service]
 class ProcessorFinder

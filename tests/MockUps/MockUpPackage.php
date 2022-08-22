@@ -6,6 +6,7 @@ namespace Medas\ConsoleTest\MockUps;
 
 use Medas\ConfigManager\ConfigManager;
 use Medas\ConfigManager\ConfigManagerPackage;
+use Medas\ConfigOptions\ConfigOptionsPackage;
 use Medas\ServiceManager\AsSingleton;
 use Medas\ServiceManager\BasePackage;
 
@@ -16,7 +17,8 @@ class MockUpPackage extends BasePackage
     public function dependencies(): array
     {
         return [
-            ConfigManagerPackage::instance()
+            ConfigManagerPackage::instance(),
+            ConfigOptionsPackage::instance(),
         ];
     }
 
@@ -29,7 +31,7 @@ class MockUpPackage extends BasePackage
     {
         $config = sm()->resolve(ConfigManager::class);
 
-        $config->addDirectory(__DIR__ . '/../../config');
+        $config->addDirectory(__DIR__);
         $config->readEnv(__DIR__ . '/../..');
 
         parent::initialize();

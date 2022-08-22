@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Medas\Console\Commands;
 
 use Medas\ServiceManager\Attributes\Service;
-use Medas\ServiceManager\Cache\CacheManager;
-use Medas\ServiceManager\Interfaces\PrimesCache;
+use Medas\ServiceManager\Cache\{CacheManager, Interfaces\PrimesCache};
+use Medas\ServiceManager\Console\{ConsoleCommand, ConsoleCommandGroup};
 
 #[Service]
 class ProcessorRepository implements PrimesCache
