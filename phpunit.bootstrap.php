@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use Medas\Console\ConsolePackage;
 use Medas\ConsoleTest\MockUps\MockUpPackage;
+use Medas\ServiceManager\ServiceManager;
 
-require_once __DIR__ . '/bootstrap.php';
-
-sm()->addPackage(MockUpPackage::instance());
+ServiceManager::get()->addPackages([
+    ConsolePackage::instance(),
+    MockUpPackage::instance(),
+]);
