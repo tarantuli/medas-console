@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medas\Console\Interfaces;
-
-use Medas\Console\Printable;
+namespace Medas\Console;
 
 interface Printer
 {

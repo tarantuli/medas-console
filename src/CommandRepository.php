@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medas\Console\Interfaces;
+namespace Medas\Console;
 
 use Medas\Console\Commands\ConsoleCommand;
 
