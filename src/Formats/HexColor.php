@@ -8,6 +8,11 @@ use Medas\Console\Exceptions\InvalidHexColorException;
 
 class HexColor implements Format
 {
+    public static function create(string $color): static
+    {
+        return new static($color);
+    }
+
     public function __construct(
         private string $color,
     )
