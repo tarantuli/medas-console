@@ -19,4 +19,9 @@ class Text implements Printable
     )
     {
     }
+
+    public function __toString(): string
+    {
+        return $this->text;
+    }
 }
