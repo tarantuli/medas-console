@@ -6,7 +6,7 @@ namespace Medas\Console\Exceptions;
 
 use Medas\Core\Exceptions\BaseException;
 
-class InvalidHexColorException extends BaseException
+class InvalidHexColor extends BaseException
 {
     public function __construct(string $code)
     {

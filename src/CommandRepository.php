@@ -11,4 +11,3 @@ interface CommandRepository
     /** @return ConsoleCommand[] */
     public function getAllCommands(): array;
 }
-

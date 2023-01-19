@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Console\Formats;
 
-use Medas\Console\Exceptions\InvalidHexColorException;
+use Medas\Console\Exceptions\InvalidHexColor;
 
 class HexColor implements Format
 {
@@ -20,7 +20,7 @@ class HexColor implements Format
         $this->color = strtolower($this->color);
 
         if (!preg_match('/^#[0-9a-f]{6}$/', $this->color)) {
-            throw new InvalidHexColorException($this->color);
+            throw new InvalidHexColor($this->color);
         }
     }
 
