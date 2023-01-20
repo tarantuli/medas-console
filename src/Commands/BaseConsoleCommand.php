@@ -10,4 +10,14 @@ abstract class BaseConsoleCommand implements ConsoleCommand
     {
         return $this->group()->path() . ':' . $this->name();
     }
+
+    public function usages(): array
+    {
+        return [''];
+    }
+
+    public function options(): array
+    {
+        return [];
+    }
 }
