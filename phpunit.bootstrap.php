@@ -3,9 +3,16 @@
 declare(strict_types=1);
 
 use Medas\Console\ConsolePackage;
-use Medas\ServiceManager\ServiceManager;
+use Medas\ServiceManager\{ServiceConfig, ServiceManager};
 
 chdir(__DIR__);
 
-$sm = ServiceManager::get();
-$sm->addPackage(ConsolePackage::instance());
+new ServiceManager(function (): ServiceConfig {
+    $config = new ServiceConfig();
+
+    $config->addPackages([
+        ConsolePackage::instance(),
+    ]);
+
+    return $config;
+});
