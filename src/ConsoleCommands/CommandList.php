@@ -11,7 +11,7 @@ use Medas\Console\{CommandRepository,
     Printer,
     Table,
     Text};
-use Medas\ServiceManager\Attributes\Service;
+use Medas\ServiceManager\Service;
 
 #[Service]
 class CommandList extends BaseConsoleCommand
@@ -34,11 +34,6 @@ class CommandList extends BaseConsoleCommand
         return 'command-list';
     }
 
-    public function description(): string
-    {
-        return 'Prints a list of all available commands';
-    }
-
     public function process(array $arguments): void
     {
         $data = [];
@@ -54,5 +49,10 @@ class CommandList extends BaseConsoleCommand
             ->print(Text::create('Available commands: '))
             ->print()
             ->print(Table::create(['command', 'description'], $data));
+    }
+
+    public function description(): string
+    {
+        return 'Prints a list of all available commands';
     }
 }
