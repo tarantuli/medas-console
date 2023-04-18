@@ -11,7 +11,7 @@ use Medas\Console\{CommandRepository,
     Printer,
     Table,
     Text};
-use Medas\ServiceManager\Service;
+use Medas\Core\Attributes\Service;
 
 #[Service]
 class CommandList extends BaseConsoleCommand
