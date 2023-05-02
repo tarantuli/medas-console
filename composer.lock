@@ -4,103 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e15d572342b34335061c543dd3bae5c1",
-    "packages": [
-        {
-            "name": "morphp/medas-core",
-            "version": "dev-dev",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:tarantuli/medas-core.git",
-                "reference": "a6b167d90e352f3722745bfd606af4678610930e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-core/zipball/a6b167d90e352f3722745bfd606af4678610930e",
-                "reference": "a6b167d90e352f3722745bfd606af4678610930e",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*"
-            },
-            "require-dev": {
-                "morphp/medas-service-manager": "dev-dev",
-                "phpunit/phpunit": "^9"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-dev": "0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Medas\\Core\\": "src/",
-                    "Medas\\CoreTest\\": "tests/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Patrick Morpey",
-                    "email": "patrick@morphp.nl"
-                }
-            ],
-            "description": "Medas core",
-            "support": {
-                "source": "https://github.com/tarantuli/medas-core/tree/dev",
-                "issues": "https://github.com/tarantuli/medas-core/issues"
-            },
-            "time": "2023-04-18T11:16:43+00:00"
-        },
-        {
-            "name": "morphp/medas-service-manager",
-            "version": "dev-dev",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:tarantuli/medas-service-manager.git",
-                "reference": "d3880847344180f478d4e522244aa93feb2e299c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-service-manager/zipball/d3880847344180f478d4e522244aa93feb2e299c",
-                "reference": "d3880847344180f478d4e522244aa93feb2e299c",
-                "shasum": ""
-            },
-            "require": {
-                "morphp/medas-console": "dev-dev",
-                "morphp/medas-core": "dev-dev"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-dev": "0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Medas\\ServiceManager\\": "src/",
-                    "Medas\\ServiceManagerTest\\": "tests/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Patrick Morpey",
-                    "email": "patrick@morphp.nl"
-                }
-            ],
-            "description": "Medas service manager",
-            "support": {
-                "source": "https://github.com/tarantuli/medas-service-manager/tree/dev",
-                "issues": "https://github.com/tarantuli/medas-service-manager/issues"
-            },
-            "time": "2023-04-18T10:54:13+00:00"
-        }
-    ],
+    "content-hash": "d995f5cdb759be4d0a53964dd3e4e30a",
+    "packages": [],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -171,6 +76,140 @@
                 }
             ],
             "time": "2022-12-30T00:23:10+00:00"
+        },
+        {
+            "name": "morphp/medas-core",
+            "version": "dev-dev",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:tarantuli/medas-core.git",
+                "reference": "60db263e67f9dd619c3838a623f9469c964e2254"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tarantuli/medas-core/zipball/60db263e67f9dd619c3838a623f9469c964e2254",
+                "reference": "60db263e67f9dd619c3838a623f9469c964e2254",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*"
+            },
+            "require-dev": {
+                "morphp/medas-service-manager": "dev-dev",
+                "phpunit/phpunit": "^9"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-dev": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Medas\\Core\\": "src/",
+                    "Medas\\CoreTest\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Morpey",
+                    "email": "patrick@morphp.nl"
+                }
+            ],
+            "description": "Medas core",
+            "support": {
+                "source": "https://github.com/tarantuli/medas-core/tree/dev",
+                "issues": "https://github.com/tarantuli/medas-core/issues"
+            },
+            "time": "2023-05-01T10:56:20+00:00"
+        },
+        {
+            "name": "morphp/medas-object-instantiator",
+            "version": "dev-dev",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:tarantuli/medas-object-instantiator.git",
+                "reference": "57c02120418281b2170cf67da9d203600ae4e7de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tarantuli/medas-object-instantiator/zipball/57c02120418281b2170cf67da9d203600ae4e7de",
+                "reference": "57c02120418281b2170cf67da9d203600ae4e7de",
+                "shasum": ""
+            },
+            "require-dev": {
+                "morphp/medas-service-manager": "dev-dev",
+                "phpunit/phpunit": "^9.5"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Medas\\ObjectInstantiator\\": "src/",
+                    "Medas\\ObjectInstantiatorTest\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Morpey",
+                    "email": "patrick@morphp.nl"
+                }
+            ],
+            "description": "Medas object instantiator",
+            "support": {
+                "source": "https://github.com/tarantuli/medas-object-instantiator/tree/dev",
+                "issues": "https://github.com/tarantuli/medas-object-instantiator/issues"
+            },
+            "time": "2023-05-01T14:40:19+00:00"
+        },
+        {
+            "name": "morphp/medas-service-manager",
+            "version": "dev-dev",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:tarantuli/medas-service-manager.git",
+                "reference": "693ab829040adcb8421cb7a8ec6ed5285f298c9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tarantuli/medas-service-manager/zipball/693ab829040adcb8421cb7a8ec6ed5285f298c9c",
+                "reference": "693ab829040adcb8421cb7a8ec6ed5285f298c9c",
+                "shasum": ""
+            },
+            "require": {
+                "morphp/medas-console": "dev-dev",
+                "morphp/medas-core": "dev-dev",
+                "morphp/medas-object-instantiator": "dev-dev"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-dev": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Medas\\ServiceManager\\": "src/",
+                    "Medas\\ServiceManagerTest\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Morpey",
+                    "email": "patrick@morphp.nl"
+                }
+            ],
+            "description": "Medas service manager",
+            "support": {
+                "source": "https://github.com/tarantuli/medas-service-manager/tree/dev",
+                "issues": "https://github.com/tarantuli/medas-service-manager/issues"
+            },
+            "time": "2023-05-01T14:38:55+00:00"
         },
         {
             "name": "myclabs/deep-copy",
