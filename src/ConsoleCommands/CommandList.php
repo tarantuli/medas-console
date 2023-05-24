@@ -46,9 +46,9 @@ class CommandList extends BaseConsoleCommand
         }
 
         $this->printer
-            ->print(Text::create('Available commands: '))
-            ->print()
-            ->print(Table::create(['command', 'description'], $data));
+            ->printLine(Text::create('Available commands: '))
+            ->printLine()
+            ->printLine(Table::create(['command', 'description'], $data));
     }
 
     public function description(): string
