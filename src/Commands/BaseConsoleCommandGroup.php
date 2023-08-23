@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Console\Commands;
 
-abstract class BaseConsoleCommandGroup implements ConsoleCommandGroup
+readonly abstract class BaseConsoleCommandGroup implements ConsoleCommandGroup
 {
     public function path(): string
     {

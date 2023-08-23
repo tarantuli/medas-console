@@ -14,12 +14,12 @@ use Medas\Console\{CommandRepository,
 use Medas\Core\Attributes\Service;
 
 #[Service]
-class CommandList extends BaseConsoleCommand
+readonly class CommandList extends BaseConsoleCommand
 {
     public function __construct(
-        private readonly Group             $group,
-        private readonly Printer           $printer,
-        private readonly CommandRepository $commandRepository,
+        private Group             $group,
+        private Printer           $printer,
+        private CommandRepository $commandRepository,
     )
     {
     }
