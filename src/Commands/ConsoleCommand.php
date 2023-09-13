@@ -10,6 +10,9 @@ interface ConsoleCommand
 
     public function name(): string;
 
+    /**
+     * This should start with a capital, and not end in a period.
+     */
     public function description(): string;
 
     /**
