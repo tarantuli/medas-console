@@ -6,5 +6,4 @@ namespace Medas\Console\Formats;
 
 class HexBgColor extends HexColor
 {
-
 }

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Medas\Console\ConsoleCommands;
 
-use Medas\Console\{CommandRepository,
+use Medas\Console\{
+    CommandRepository,
     Commands\BaseConsoleCommand,
     Commands\ConsoleCommandGroup,
     Formats\Style,
     Printer,
     Table,
-    Text};
+    Text
+};
 use Medas\Core\Attributes\Service;
 
 #[Service]

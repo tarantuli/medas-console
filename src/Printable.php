@@ -6,5 +6,4 @@ namespace Medas\Console;
 
 interface Printable
 {
-
 }

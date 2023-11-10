@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Console;
 
-use Medas\Console\Commands\ConsoleCommand;
-
 interface CommandRepository
 {
-    /** @return ConsoleCommand[] */
+    /** @return Commands\ConsoleCommand[] */
     public function getAllCommands(): array;
 }

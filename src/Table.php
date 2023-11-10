@@ -13,7 +13,7 @@ class Table implements Printable
 
     public function __construct(
         public array $headers,
-        public array $data = []
+        public array $data = [],
     )
     {
     }
