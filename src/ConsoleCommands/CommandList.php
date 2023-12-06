@@ -51,7 +51,7 @@ readonly class CommandList extends BaseConsoleCommand
             ->printLine()
             ->printLine(Text::create('Available commands: '))
             ->printLine()
-            ->printLine(Table::create(['command', 'description'], $data));
+            ->printLine(Table::create(['Command', 'Description'], $data));
     }
 
     public function description(): string
