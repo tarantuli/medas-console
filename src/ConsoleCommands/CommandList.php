@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Medas\Console\ConsoleCommands;
 
-use Medas\Console\{
-    CommandRepository,
+use Medas\Console\{CommandRepository,
     Commands\BaseConsoleCommand,
     Commands\ConsoleCommandGroup,
+    Formats\Color,
     Formats\Style,
     Printer,
     Table,
-    Text
-};
+    Text};
 use Medas\Core\Attributes\Service;
 
 #[Service]
@@ -42,8 +41,8 @@ readonly class CommandList extends BaseConsoleCommand
 
         foreach ($this->commandRepository->getAllCommands() as $command) {
             $data[] = [
-                Text::create($command->fullCommand(), Style::Bold),
-                Text::create($command->description()),
+                Text::create($command->fullCommand(), Color::Green),
+                Text::create($command->description(), Color::LightGray),
             ];
         }
 
