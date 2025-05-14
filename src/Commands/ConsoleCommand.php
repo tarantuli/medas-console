@@ -14,7 +14,9 @@ interface ConsoleCommand
      * This should return an array of alias words.
      *
      * Each word can be used as a direct alias to this command, bypassing both the group name and the command name when
-     * invoking. Each alias should consist of lowercase letters and dashes only.
+     * invoking. Each alias should consist of lowercase letters, dots and dashes only.
+     *
+     * Commands that create something should start with "c.", e.g. "c.entity"
      */
     public function aliases(): array;
 
