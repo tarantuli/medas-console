@@ -11,6 +11,14 @@ interface ConsoleCommand
     public function name(): string;
 
     /**
+     * This should return an array of alias words.
+     *
+     * Each word can be used as a direct alias to this command, bypassing both the group name and the command name when
+     * invoking. Each alias should consist of lowercase letters and dashes only.
+     */
+    public function aliases(): array;
+
+    /**
      * This should start with a capital, and not end in a period.
      */
     public function description(): string;
