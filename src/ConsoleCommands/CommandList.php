@@ -43,7 +43,7 @@ readonly class CommandList extends BaseConsoleCommand
         foreach ($this->commandRepository->getAllCommands() as $command) {
             $data[] = [
                 Text::create($command->fullCommand(), Color::Green),
-                Text::create(implode(', ', $command->aliases()), Color::Yellow),
+                Text::create(implode(', ', $command->aliases()), Color::LightYellow),
                 Text::create($command->description(), Color::LightGray),
             ];
         }
