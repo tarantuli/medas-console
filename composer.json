@@ -1,34 +1,30 @@
 {
-    "name": "morphp/medas-console",
-    "description": "Medas console",
-    "keywords": [
-        "console"
-    ],
-    "authors": [
-        {
-            "name": "Patrick Morpey",
-            "email": "patrick@morphp.nl"
-        }
-    ],
-    "type": "library",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "require": {
-        "morphp/medas-core": "dev-dev"
-    },
-    "require-dev": {
-        "morphp/medas-service-manager": "dev-dev",
-        "phpunit/phpunit": "^9.5"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-dev": "0.x-dev"
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "Medas\\Console\\": "src/",
-            "Medas\\ConsoleTest\\": "tests/"
-        }
+  "name": "morphp/medas-console",
+  "description": "Medas console",
+  "version": "2.0.0",
+  "keywords": [
+    "console"
+  ],
+  "authors": [
+    {
+      "name": "Patrick Morpey",
+      "email": "patrick@morphp.nl"
     }
+  ],
+  "type": "library",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "morphp/medas-core": "^2"
+  },
+  "require-dev": {
+    "morphp/medas-service-manager": "^2",
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Medas\\Console\\": "src/",
+      "Medas\\ConsoleTest\\": "tests/"
+    }
+  }
 }
