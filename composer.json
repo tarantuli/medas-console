@@ -1,7 +1,7 @@
 {
   "name": "morphp/medas-console",
   "description": "Medas console",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "keywords": [
     "console"
   ],
@@ -15,7 +15,8 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "morphp/medas-core": "^2"
+    "morphp/medas-core": "^2",
+    "php": "^8.4"
   },
   "require-dev": {
     "morphp/medas-service-manager": "^2",
