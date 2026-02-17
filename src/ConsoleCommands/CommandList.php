@@ -19,9 +19,9 @@ use Medas\Core\Attributes\Service;
 readonly class CommandList extends BaseConsoleCommand
 {
     public function __construct(
+        private CommandRepository $commandRepository,
         private Group             $group,
         private Printer           $printer,
-        private CommandRepository $commandRepository,
     )
     {
     }
