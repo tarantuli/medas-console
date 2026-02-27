@@ -14,7 +14,7 @@ interface ConsoleCommand
      * This should return an array of alias words.
      *
      * Each word can be used as a direct alias to this command, bypassing both the group name and the command name when
-     * invoking. Each alias should consist of lowercase letters, numbers, dots and dashes only and must be at least two
+     * invoking. Each alias should consist of lowercase letters, numbers, dots, and dashes only and must be at least two
      * characters long.
      *
      * Commands that create something should start with "c.", e.g. "c.entity"
@@ -22,7 +22,7 @@ interface ConsoleCommand
     public function aliases(): array;
 
     /**
-     * This should start with a capital, and not end in a period.
+     * This should start with a capital and not end in a period.
      */
     public function description(): string;
 
@@ -31,7 +31,7 @@ interface ConsoleCommand
      * of each usage string.
      *
      * Each string must consist of the definition after the command name itself,
-     * e.g. if the command would be "php bin/console examples:command --output",
+     * e.g., if the command would be "php bin/console examples:command --output",
      * the usage string should be "--output"
      *
      * @return string[]

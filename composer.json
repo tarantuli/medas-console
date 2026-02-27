@@ -1,7 +1,6 @@
 {
   "name": "morphp/medas-console",
   "description": "Medas console",
-  "version": "3.0.1",
   "keywords": [
     "console"
   ],
@@ -12,8 +11,6 @@
     }
   ],
   "type": "library",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require": {
     "morphp/medas-core": "^3",
     "php": "^8.4"
@@ -24,7 +21,11 @@
   },
   "autoload": {
     "psr-4": {
-      "Medas\\Console\\": "src/",
+      "Medas\\Console\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "Medas\\ConsoleTest\\": "tests/"
     }
   }
