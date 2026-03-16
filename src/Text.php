@@ -15,10 +15,10 @@ class Text implements Printable
     /** @var Formats\Format[] */
     public array $format;
 
-    /** @param Formats\Format|Formats\Format[] $format */
+    /** @param Formats\Format[] $format */
     public function __construct(
-        public string  $text,
-        Formats\Format ...$format,
+        public string       $text,
+        Formats\Format|null ...$format,
     )
     {
         $this->format = $format;
