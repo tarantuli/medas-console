@@ -6,10 +6,10 @@ namespace Medas\Console;
 
 class Blocks implements Printable
 {
-    /** @var Printable[] */
+    /** @var Printable|null[] */
     public array $blocks;
 
-    public function __construct(Printable ...$blocks)
+    public function __construct(Printable|null ...$blocks)
     {
         $this->blocks = $blocks;
     }
