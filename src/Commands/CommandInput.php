@@ -21,19 +21,19 @@ readonly class CommandInput
     }
 
     /**
-     * Returns if the given zero-based index is set.
+     * Returns if the given one-based index is set.
      */
     public function hasArgument(int $index): bool
     {
-        return array_key_exists($index, $this->arguments);
+        return array_key_exists($index - 1, $this->arguments);
     }
 
     /**
-     * Returns the value of the argument at the given zero-based index, null if it is not set.
+     * Returns the value of the argument at the given one-based index, null if it is not set.
      */
     public function getArgument(int $index): mixed
     {
-        return $this->arguments[$index] ?? null;
+        return $this->arguments[$index - 1] ?? null;
     }
 
     public function hasOption(string $name): bool
