@@ -9,6 +9,7 @@ class Option
     public function __construct(
         public string      $longCode,
         public string|null $shortCode = null,
+        public bool        $valueAllowed = false,
         public bool        $valueRequired = false,
     )
     {
