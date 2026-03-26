@@ -45,5 +45,5 @@ interface ConsoleCommand
      */
     public function maxArgumentCount(): int;
 
-    public function process(Arguments $arguments): void;
+    public function process(CommandInput $input): void;
 }

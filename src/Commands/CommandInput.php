@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Console\Commands;
 
-readonly class Arguments
+readonly class CommandInput
 {
     public function __construct(
         /**

@@ -6,8 +6,8 @@ namespace Medas\Console\ConsoleCommands;
 
 use Medas\Console\{
     CommandRepository,
-    Commands\Arguments,
     Commands\BaseConsoleCommand,
+    Commands\CommandInput,
     Commands\ConsoleCommandGroup,
     Formats\Color,
     Printer,
@@ -47,12 +47,12 @@ readonly class CommandList extends BaseConsoleCommand
         return 1;
     }
 
-    public function process(Arguments $arguments): void
+    public function process(CommandInput $input): void
     {
         $data = [];
 
-        $filter = isset($arguments->arguments[0])
-            ? '/' . preg_quote($arguments->arguments[0], '/') . '/i'
+        $filter = isset($input->arguments[0])
+            ? '/' . preg_quote($input->arguments[0], '/') . '/i'
             : null;
 
         foreach ($this->commandRepository->getAllCommands() as $command) {
