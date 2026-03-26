@@ -14,5 +14,8 @@ class Range
         public int|false|null $max = null,
     )
     {
+        if ($this->max === null) {
+            $this->max = $min;
+        }
     }
 }
