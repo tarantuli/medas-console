@@ -6,6 +6,16 @@ namespace Medas\Console\Commands;
 
 class Option
 {
+    public static function valueAllowed(string $longCode, string|null $shortCode = null): static
+    {
+        return new static($longCode, $shortCode, true);
+    }
+
+    public static function valueRequired(string $longCode, string|null $shortCode = null): static
+    {
+        return new static($longCode, $shortCode, true, true);
+    }
+
     public function __construct(
         public string      $longCode,
         public string|null $shortCode = null,
