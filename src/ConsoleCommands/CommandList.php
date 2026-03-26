@@ -9,6 +9,7 @@ use Medas\Console\{
     Commands\BaseConsoleCommand,
     Commands\CommandInput,
     Commands\ConsoleCommandGroup,
+    Commands\Range,
     Formats\Color,
     Printer,
     Table,
@@ -42,17 +43,17 @@ readonly class CommandList extends BaseConsoleCommand
         return 'Prints a list of all available commands';
     }
 
-    public function maxArgumentCount(): int
+    public function allowedArgumentCount(): Range
     {
-        return 1;
+        return new Range(0, 1);
     }
 
     public function process(CommandInput $input): void
     {
         $data = [];
 
-        $filter = isset($input->arguments[0])
-            ? '/' . preg_quote($input->arguments[0], '/') . '/i'
+        $filter = $input->hasArgument(1)
+            ? '/' . preg_quote($input->getArgument(1), '/') . '/i'
             : null;
 
         foreach ($this->commandRepository->getAllCommands() as $command) {
