@@ -21,13 +21,8 @@ readonly abstract class BaseConsoleCommand implements ConsoleCommand
         return [];
     }
 
-    public function minArgumentCount(): int
+    public function allowedArgumentCount(): Range
     {
-        return 0;
-    }
-
-    public function maxArgumentCount(): int
-    {
-        return 0;
+        return new Range(0);
     }
 }

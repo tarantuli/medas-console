@@ -36,14 +36,9 @@ interface ConsoleCommand
     public function options(): array;
 
     /**
-     * The minimum number of arguments that must be passed to this command.
+     * The minimum and maximum number of arguments that can be passed to this command.
      */
-    public function minArgumentCount(): int;
-
-    /**
-     * The maximum number of arguments that can be passed to this command.
-     */
-    public function maxArgumentCount(): int;
+    public function allowedArgumentCount(): Range;
 
     public function process(CommandInput $input): void;
 }
