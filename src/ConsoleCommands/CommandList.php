@@ -6,6 +6,7 @@ namespace Medas\Console\ConsoleCommands;
 
 use Medas\Console\{
     CommandRepository,
+    Commands\Arguments,
     Commands\BaseConsoleCommand,
     Commands\ConsoleCommandGroup,
     Formats\Color,
@@ -36,11 +37,37 @@ readonly class CommandList extends BaseConsoleCommand
         return 'command-list';
     }
 
-    public function process(array $arguments): void
+    public function description(): string
+    {
+        return 'Prints a list of all available commands';
+    }
+
+    public function maxArgumentCount(): int
+    {
+        return 1;
+    }
+
+    public function process(Arguments $arguments): void
     {
         $data = [];
 
+        $filter = isset($arguments->arguments[0])
+            ? '/' . preg_quote($arguments->arguments[0], '/') . '/i'
+            : null;
+
         foreach ($this->commandRepository->getAllCommands() as $command) {
+            if ($filter) {
+                $fullText = $command->fullCommand()
+                    . ' '
+                    . implode(', ', $command->aliases())
+                    . ' '
+                    . $command->description();
+
+                if (preg_match($filter, $fullText) === 0) {
+                    continue;
+                }
+            }
+
             $data[] = [
                 Text::create($command->fullCommand(), Color::Green),
                 Text::create(implode(', ', $command->aliases()), Color::LightYellow),
@@ -53,10 +80,5 @@ readonly class CommandList extends BaseConsoleCommand
             ->printLine(Text::create('Available commands', Color::White))
             ->printLine()
             ->printLine(Table::create(['Command', 'Aliases', 'Description'], $data));
-    }
-
-    public function description(): string
-    {
-        return 'Prints a list of all available commands';
     }
 }

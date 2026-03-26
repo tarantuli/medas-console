@@ -16,13 +16,18 @@ readonly abstract class BaseConsoleCommand implements ConsoleCommand
         return [];
     }
 
-    public function usages(): array
-    {
-        return [''];
-    }
-
     public function options(): array
     {
         return [];
+    }
+
+    public function minArgumentCount(): int
+    {
+        return 0;
+    }
+
+    public function maxArgumentCount(): int
+    {
+        return 0;
     }
 }

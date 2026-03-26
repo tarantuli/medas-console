@@ -10,6 +10,8 @@ interface ConsoleCommand
 
     public function name(): string;
 
+    public function fullCommand(): string;
+
     /**
      * This should return an array of alias words.
      *
@@ -27,26 +29,21 @@ interface ConsoleCommand
     public function description(): string;
 
     /**
-     * See https://github.com/docopt/docopt.php#help-message-format for the format
-     * of each usage string.
+     * This should return an array of Option objects. If an option is passed that is not defined here, it will throw an exception.
      *
-     * Each string must consist of the definition after the command name itself,
-     * e.g., if the command would be "php bin/console examples:command --output",
-     * the usage string should be "--output"
-     *
-     * @return string[]
-     */
-    public function usages(): array;
-
-    /**
-     * See https://github.com/docopt/docopt.php#help-message-format for the format
-     * of each option string.
-     *
-     * @return string[]
+     * @return Option[]
      */
     public function options(): array;
 
-    public function fullCommand(): string;
+    /**
+     * The minimum number of arguments that must be passed to this command.
+     */
+    public function minArgumentCount(): int;
 
-    public function process(array $arguments): void;
+    /**
+     * The maximum number of arguments that can be passed to this command.
+     */
+    public function maxArgumentCount(): int;
+
+    public function process(Arguments $arguments): void;
 }
