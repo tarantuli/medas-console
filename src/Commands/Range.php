@@ -6,6 +6,11 @@ namespace Medas\Console\Commands;
 
 class Range
 {
+    public static function exactly(int $value): static
+    {
+        return new static($value);
+    }
+
     /**
      * If $max is null or not given, then the max is equal to $min. If $max is false, then the max is infinite.
      */
