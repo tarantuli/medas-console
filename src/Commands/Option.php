@@ -16,6 +16,11 @@ class Option
         return new static($longCode, $shortCode, true, true);
     }
 
+    public static function noValue(string $longCode, string|null $shortCode = null): static
+    {
+        return new static($longCode, $shortCode);
+    }
+
     public function __construct(
         public string      $longCode,
         public string|null $shortCode = null,
