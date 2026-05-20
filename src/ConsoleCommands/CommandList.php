@@ -10,7 +10,7 @@ use Medas\Console\{
     Commands\CommandInput,
     Commands\ConsoleCommandGroup,
     Commands\Range,
-    Formats\Color,
+    Formats\SafeColor,
     Printer,
     Table,
     Text
@@ -70,15 +70,15 @@ readonly class CommandList extends BaseConsoleCommand
             }
 
             $data[] = [
-                Text::create($command->fullCommand(), Color::Green),
-                Text::create(implode(', ', $command->aliases()), Color::LightYellow),
-                Text::create($command->description(), Color::LightGray),
+                Text::create($command->fullCommand(), SafeColor::Green),
+                Text::create(implode(', ', $command->aliases()), SafeColor::LightYellow),
+                Text::create($command->description(), SafeColor::LightGray),
             ];
         }
 
         $this->printer
             ->printLine()
-            ->printLine(Text::create('Available commands', Color::White))
+            ->printLine(Text::create('Available commands', SafeColor::White))
             ->printLine()
             ->printLine(Table::create(['Command', 'Aliases', 'Description'], $data));
     }

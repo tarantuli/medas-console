@@ -16,7 +16,6 @@
     "php": "^8.4"
   },
   "require-dev": {
-    "morphp/medas-service-manager": "^3",
     "phpunit/phpunit": "^10"
   },
   "autoload": {

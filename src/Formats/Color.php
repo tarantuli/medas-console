@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\Console\Formats;
 
+#[\Deprecated('use SafeColor instead')]
 enum Color implements Format
 {
     case Default;
