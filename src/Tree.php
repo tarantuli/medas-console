@@ -10,7 +10,7 @@ namespace Medas\Console;
 class Tree implements Printable
 {
     public function __construct(
-        public iterable $nodes,
+        public mixed    $rootNode,
 
         /** @param Closure(mixed): Printable|string $label */
         public \Closure $label,
