@@ -17,11 +17,14 @@ enum SafeColor: string implements Format
     case Black = '#000000';
     case Gray = '#808080';
     case LightGray = '#d0d0d0';
-    case DarkGray = '#444444';
     case LightRed = '#ff5f5f';
     case LightGreen = '#5fff87';
     case LightBlue = '#5fafff';
     case LightYellow = '#ffffd7';
     case LightCyan = '#afffff';
     case LightMagenta = '#ff87ff';
+    case DarkGray = '#444444';
+    case DarkRed = '#af0000';
+    case DarkGreen = '#005f00';
+    case DarkYellow = '#d7af00';
 }
