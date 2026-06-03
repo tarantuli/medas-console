@@ -131,7 +131,7 @@ readonly class GenerateReport extends BaseConsoleCommand
 }
 ```
 
-Invoking: `php bin/console reports:generate 2026-05 --format=csv --verbose`
+Invoking: `php bin/medas reports:generate 2026-05 --format=csv --verbose`
 
 **Using `Range` for flexible argument counts:**
 
@@ -220,32 +220,32 @@ $this->printer->printLine($tree);
 **Listing all available commands:**
 
 ```bash
-php bin/console console:command-list
+php bin/medas console:command-list
 
 # Filter by a substring of the command name, alias, or description
-php bin/console console:command-list report
+php bin/medas console:command-list report
 ```
 
 **Invoking a command:**
 
 ```bash
 # Full group:name form
-php bin/console reports:generate 2026-05 --format=csv
+php bin/medas reports:generate 2026-05 --format=csv
 
 # Via alias (if defined)
-php bin/console report 2026-05
+php bin/medas report 2026-05
 ```
 
 **Options syntax:**
 
 ```bash
 # Long form with value
-php bin/console reports:generate 2026-05 --format=csv
+php bin/medas reports:generate 2026-05 --format=csv
 
 # Short form with value
-php bin/console reports:generate 2026-05 -f csv
+php bin/medas reports:generate 2026-05 -f csv
 
 # Flag (no value)
-php bin/console reports:generate 2026-05 --verbose
-php bin/console reports:generate 2026-05 -v
+php bin/medas reports:generate 2026-05 --verbose
+php bin/medas reports:generate 2026-05 -v
 ```
