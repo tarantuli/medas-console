@@ -8,12 +8,14 @@ readonly class CommandInput
 {
     public function __construct(
         /**
-         * A numeric list of arguments passed to the command.
+         * Arguments passed to the command, keyed by the `name` of the matching
+         * Argument declared in ConsoleCommand::arguments().
          */
         private array $arguments,
 
         /**
-         * An associative array of options passed to the command. A value of true indicates that no value was passed.
+         * An associative array of options passed to the command.
+         * A value of true indicates that no value was passed.
          */
         private array $options,
     )
@@ -21,19 +23,21 @@ readonly class CommandInput
     }
 
     /**
-     * Returns if the given one-based index is set.
+     * Returns if the argument with the given name (matching an Argument::$name
+     * from ConsoleCommand::arguments()) is set.
      */
-    public function hasArgument(int $index): bool
+    public function hasArgument(string $name): bool
     {
-        return array_key_exists($index - 1, $this->arguments);
+        return array_key_exists($name, $this->arguments);
     }
 
     /**
-     * Returns the value of the argument at the given one-based index, null if it is not set.
+     * Returns the value of the argument with the given name (matching an
+     * Argument::$name from ConsoleCommand::arguments()), null if it is not set.
      */
-    public function getArgument(int $index): mixed
+    public function getArgument(string $name): mixed
     {
-        return $this->arguments[$index - 1] ?? null;
+        return $this->arguments[$name] ?? null;
     }
 
     public function hasOption(string $name): bool

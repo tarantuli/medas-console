@@ -6,10 +6,10 @@ namespace Medas\Console\ConsoleCommands;
 
 use Medas\Console\{
     CommandRepository,
+    Commands\Argument,
     Commands\BaseConsoleCommand,
     Commands\CommandInput,
     Commands\ConsoleCommandGroup,
-    Commands\Range,
     Formats\SafeColor,
     Printer,
     Table,
@@ -43,17 +43,17 @@ readonly class CommandList extends BaseConsoleCommand
         return 'Prints a list of all available commands';
     }
 
-    public function allowedArgumentCount(): Range
+    public function arguments(): array
     {
-        return new Range(0, 1);
+        return [new Argument('filter', false)];
     }
 
     public function process(CommandInput $input): void
     {
         $data = [];
 
-        $filter = $input->hasArgument(1)
-            ? '/' . preg_quote($input->getArgument(1), '/') . '/i'
+        $filter = $input->hasArgument('filter')
+            ? '/' . preg_quote($input->getArgument('filter'), '/') . '/i'
             : null;
 
         foreach ($this->commandRepository->getAllCommands() as $command) {

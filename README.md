@@ -10,7 +10,7 @@ Provides the building blocks for CLI applications: a command definition system, 
 
 Commands are grouped under `ConsoleCommandGroup` instances using a `group:name` path convention (e.g. `config-options:list`). Each command is a class implementing `ConsoleCommand` — typically by extending `BaseConsoleCommand` — and declares its name, description, accepted arguments, and options. The framework discovers all registered commands automatically via the service container.
 
-`CommandInput` carries the parsed arguments (one-based indexed) and options passed at invocation. Options are declared as `Option` objects with three modes: `noValue` (flag), `valueAllowed` (optional value), and `valueRequired` (mandatory value). `Range` constrains the minimum and maximum number of positional arguments a command accepts; passing `false` as the max allows an unlimited number.
+`CommandInput` carries the parsed arguments (keyed by name) and options passed at invocation. Options are declared as `Option` objects with three modes: `noValue` (flag), `valueAllowed` (optional value), and `valueRequired` (mandatory value). Positional arguments are declared as `Argument` objects, each with a `name`, whether it's `required`, whether it's `isVariadic` (gathers all remaining values, must be the last argument), an optional `validator`, and an optional `description`.
 
 **Output model:**
 
@@ -35,7 +35,6 @@ Everything printed is a `Printable`. The package ships several concrete types:
 | `BgColor`    | Named background colours                                              |
 | `Style`      | `Bold`, `Dim`, `Underlined`                                           |
 
-`Color` is also present but marked `@deprecated` — use `SafeColor` instead.
 
 A built-in `console:command-list` command lists all registered commands with their aliases and descriptions, with an optional filter argument.
 
@@ -78,7 +77,7 @@ Groups can be nested — return another group from `parent()` and `BaseConsoleCo
 **Defining a command:**
 
 ```php
-use Medas\Console\Commands\{BaseConsoleCommand, CommandInput, ConsoleCommandGroup, Option, Range};
+use Medas\Console\Commands\{Argument, BaseConsoleCommand, CommandInput, ConsoleCommandGroup, Option};
 use Medas\Core\Attributes\Service;
 
 #[Service]
@@ -114,15 +113,15 @@ readonly class GenerateReport extends BaseConsoleCommand
         ];
     }
 
-    public function allowedArgumentCount(): Range
+    public function arguments(): array
     {
-        // Requires exactly one positional argument (the period)
-        return new Range(1);
+        // A single required argument named 'period'
+        return [Argument::required('period', description: 'The reporting period, e.g. 2026-05')];
     }
 
     public function process(CommandInput $input): void
     {
-        $period  = $input->getArgument(1);
+        $period  = $input->getArgument('period');
         $format  = $input->getOption('format') ?? 'pdf';
         $verbose = $input->hasOption('verbose');
 
@@ -133,20 +132,34 @@ readonly class GenerateReport extends BaseConsoleCommand
 
 Invoking: `php bin/medas reports:generate 2026-05 --format=csv --verbose`
 
-**Using `Range` for flexible argument counts:**
+**Declaring positional arguments with `Argument`:**
 
 ```php
-// Exactly two arguments
-return new Range(2);
+public function arguments(): array
+{
+    return [
+        // Required argument
+        Argument::required('period'),
 
-// One to three arguments
-return new Range(1, 3);
+        // Optional argument, falling back to 'pdf' if not supplied
+        Argument::optional('format', default: 'pdf'),
 
-// At least one argument, no upper limit
-return new Range(1, false);
+        // Variadic argument — gathers all remaining values (must be last)
+        Argument::variadic('tags'),
 
-// Zero arguments (default in BaseConsoleCommand)
-return new Range(0);
+        // With a validator and description
+        Argument::required('period', validator: new PeriodValidator(), description: 'e.g. 2026-05'),
+    ];
+}
+```
+
+No arguments (the default in `BaseConsoleCommand`):
+
+```php
+public function arguments(): array
+{
+    return [];
+}
 ```
 
 **Aliases** — a short word that invokes the command without typing the group prefix:

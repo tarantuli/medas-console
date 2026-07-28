@@ -21,8 +21,8 @@ readonly abstract class BaseConsoleCommand implements ConsoleCommand
         return [];
     }
 
-    public function allowedArgumentCount(): Range
+    public function arguments(): array
     {
-        return new Range(0);
+        return [];
     }
 }

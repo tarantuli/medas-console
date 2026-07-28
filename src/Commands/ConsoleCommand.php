@@ -15,9 +15,9 @@ interface ConsoleCommand
     /**
      * This should return an array of alias words.
      *
-     * Each word can be used as a direct alias to this command, bypassing both the group name and the command name when
-     * invoking. Each alias should consist of lowercase letters, numbers, dots, and dashes only and must be at least two
-     * characters long.
+     * Each word can be used as a direct alias to this command, bypassing both the group name and the command name
+     * when invoking. Each alias should consist of lowercase letters, numbers, dots, and dashes only and must be
+     * at least two characters long.
      *
      * Commands that create something should start with "c.", e.g. "c.entity"
      */
@@ -29,16 +29,23 @@ interface ConsoleCommand
     public function description(): string;
 
     /**
-     * This should return an array of Option objects. If an option is passed that is not defined here, it will throw an exception.
+     * This should return an array of Option objects. If an option is passed that is not defined here,
+     * it will throw an exception.
      *
      * @return Option[]
      */
     public function options(): array;
 
     /**
-     * The minimum and maximum number of arguments that can be passed to this command.
+     * This should return an array of Argument objects. If an argument is passed that is not defined here,
+     * it will throw an exception.
+     *
+     * Required arguments should be listed before optional ones. At most one argument may be variadic,
+     * and it must be the last one in the array.
+     *
+     * @return Argument[]
      */
-    public function allowedArgumentCount(): Range;
+    public function arguments(): array;
 
     public function process(CommandInput $input): void;
 }
