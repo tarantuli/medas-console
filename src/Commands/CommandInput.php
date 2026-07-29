@@ -28,7 +28,7 @@ readonly class CommandInput
      */
     public function hasArgument(string $name): bool
     {
-        return array_key_exists($name, $this->arguments);
+        return array_key_exists($name, $this->arguments) && $this->arguments[$name] !== null;
     }
 
     /**
