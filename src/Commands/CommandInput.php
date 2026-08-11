@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\Console\Commands;
 
+use Medas\Console\Exceptions\UndeclaredArgumentRequested;
+
 readonly class CommandInput
 {
     public function __construct(
@@ -33,11 +35,17 @@ readonly class CommandInput
 
     /**
      * Returns the value of the argument with the given name (matching an
-     * Argument::$name from ConsoleCommand::arguments()), null if it is not set.
+     * Argument::$name from ConsoleCommand::arguments()). A declared but unsupplied
+     * argument yields its default; requesting a name the command never declared
+     * throws, since that's a programming error (typically a typo).
      */
     public function getArgument(string $name): mixed
     {
-        return $this->arguments[$name] ?? null;
+        if (!array_key_exists($name, $this->arguments)) {
+            throw new UndeclaredArgumentRequested($name, array_keys($this->arguments));
+        }
+
+        return $this->arguments[$name];
     }
 
     public function hasOption(string $name): bool
