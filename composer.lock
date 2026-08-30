@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "feb1b267cfe70b0b417f2402083f9ea9",
+    "content-hash": "cf6d6ea99c68fc23c0147cc66ed65fe4",
     "packages": [
         {
             "name": "morphp/medas-core",
-            "version": "v4.3.3",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-core.git",
-                "reference": "5ded18931ebc6f57df8e49fc8a45e3269b36debf"
+                "reference": "8be9fc9b1abc79973ddb47c99e4d691693591d00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-core/zipball/5ded18931ebc6f57df8e49fc8a45e3269b36debf",
-                "reference": "5ded18931ebc6f57df8e49fc8a45e3269b36debf",
+                "url": "https://api.github.com/repos/tarantuli/medas-core/zipball/8be9fc9b1abc79973ddb47c99e4d691693591d00",
+                "reference": "8be9fc9b1abc79973ddb47c99e4d691693591d00",
                 "shasum": ""
             },
             "require": {
@@ -50,10 +50,10 @@
                 "medas"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-core/tree/v4.3.3",
+                "source": "https://github.com/tarantuli/medas-core/tree/v4.3.5",
                 "issues": "https://github.com/tarantuli/medas-core/issues"
             },
-            "time": "2026-08-06T13:16:46+00:00"
+            "time": "2026-08-19T09:34:09+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -1766,6 +1766,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+        "ext-mbstring": "*",
         "php": "^8.4"
     },
     "platform-dev": {},

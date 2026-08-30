@@ -13,13 +13,13 @@ readonly class CommandInput
          * Arguments passed to the command, keyed by the `name` of the matching
          * Argument declared in ConsoleCommand::arguments().
          */
-        private array $arguments,
+        private array $arguments = [],
 
         /**
          * An associative array of options passed to the command.
          * A value of true indicates that no value was passed.
          */
-        private array $options,
+        private array $options = [],
     )
     {
     }
