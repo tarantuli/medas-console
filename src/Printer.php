@@ -13,7 +13,7 @@ interface Printer
     public function printLine(Printable ...$blocks): self;
 
     /** Prints the given text as an inline block */
-    public function printText(string $text, mixed $format = null): self;
+    public function printText(string|\Stringable $text, mixed $format = null): self;
 
     /** Prints a newline */
     public function printEol(): self;
