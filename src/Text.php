@@ -12,7 +12,7 @@ class Text implements Printable
         return new self($text, ...$format);
     }
 
-    private string $text;
+    public string $text;
 
     /** @var Formats\Format[] */
     public array $format;
